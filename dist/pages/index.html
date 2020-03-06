@@ -1,1 +1,71 @@
-<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><title>Document</title><link rel=stylesheet href=../lib/bootstrap/dist/css/bootstrap.css><link rel=stylesheet href=../css/index.css></head><body><h1>我是一个粉刷匠，粉刷本领强</h1><script src=../lib/jquery/dist/jquery.min.js></script><script src=../js/index.js></script></body></html>
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><title>首页</title><link rel=stylesheet href=../lib/bootstrap/dist/css/bootstrap.css><link rel=stylesheet href=../css/common.css><link rel=stylesheet href=../css/index.css><link rel=stylesheet href=../lib/swiper/css/swiper.min.css><link rel=stylesheet href=//at.alicdn.com/t/font_1571151_e24lm9qvbgn.css></head><body><div class=header><div class=header-container><ul><li><a href=list.html>小米商城</a></li><span>|</span><li><a href=#>MIUI</a></li><span>|</span><li><a href=#>loT</a></li><span>|</span><li><a href=#>云服务</a></li><span>|</span><li><a href=#>金融</a></li><span>|</span><li><a href=#>有品</a></li><span>|</span><li><a href=#>小爱开放平台</a></li><span>|</span><li><a href=#>企业团购</a></li><span>|</span><li><a href=#>资格证照</a></li><span>|</span><li><a href=#>协议规则</a></li><span>|</span><li class=download-father><a class=downloadApp href=#>下载APP</a><span class=download><img src=../images/download.png alt=""></span></li><span>|</span><li><a href=#>Select Location</a></li></ul><ol><li><a href=login.html>登录</a></li><span>|</span><li><a href="">注册</a></li><span>|</span><li><a href="">消息通知</a></li><span>|</span><li><a href=""><i class="iconfont icon-icon-test4"></i>购物车(0)</a></li></ol></div></div><div class=nav_top><ul></ul></div><div class=nav_box><ul></ul></div><div class="banner container"><div class=swiper-container><div class=swiper-wrapper><div class=swiper-slide><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e491c83bde043ca4e8ff2d8255dfef.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""></div><div class=swiper-slide><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/755aca9487082e7698e16f17cfb70839.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""></div><div class=swiper-slide><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/dcb09c80c58dc9d71623c925739a3733.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""></div><div class=swiper-slide><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6bd4174b8c5aad67a64864a5716ad152.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""></div></div><div class=swiper-pagination></div><div class="swiper-button-prev prev"></div><div class="swiper-button-next next"></div></div><div class=nav_list><ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li></ul></div></div><script src=../lib/swiper/js/swiper.min.js></script><script src=../lib/jquery/dist/jquery.min.js></script><script src=../js/index.js></script><script>$('.downloadApp')
+            .on({
+                mouseenter: () => $('.download').stop().slideDown(),
+                mouseleave: () => $('.download').stop().slideUp()
+            })
+            $('.download')
+            .on({
+              mouseover: function () { $(this).finish().show() },
+              mouseout: function () { $(this).finish().slideUp() }
+            })
+        getList()
+        function getList() {
+            $.ajax({
+                url: '../lib/nav_top.json',
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res)
+                    let str = ''
+                    res.forEach(item => {
+                        str += `<li>${item.name}</li>`
+                    })
+                    $('.nav_top > ul')
+                        .html(str)
+                        .on({
+                            mouseenter: () => $('.nav_box').stop().slideDown(),
+                            mouseleave: () => $('.nav_box').stop().slideUp()
+                        })
+                        .children('li') 
+                        .on('mouseover', function () {
+                            const index = $(this).index()
+                            const list = res[index].list
+                            let str = ''
+                            list.forEach(item => {
+                                str += `
+              <li>
+                <div>
+                  <img src="${ item.list_url}" alt="">
+                </div>
+                <p class="title">${ item.list_name}</p>
+                <span class="price">${ item.list_price}</span>
+              </li>
+            `
+                            })
+                            $('.nav_box > ul').html(str)
+                        })
+                    $('.nav_box')
+                        .on({
+                            mouseover: function () {
+                                $(this).finish().show()
+                            },
+                            mouseout: function () {
+                                $(this).finish().slideUp()
+                            }
+                        })
+                }
+            })
+        }
+        var mySwiper = new Swiper ('.swiper-container', {
+        loop: true, 
+        autoplay: {
+          delay: 3000
+        },
+        effect: 'fade',
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      })</script></body></html>

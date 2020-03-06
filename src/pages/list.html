@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表页</title>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/list.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1571151_e24lm9qvbgn.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-container">
+            <ul>
+                <li><a href="index.html">小米商城</a></li>
+                <span>|</span>
+                <li><a href="#">MIUI</a></li>
+                <span>|</span>
+                <li><a href="#">loT</a></li>
+                <span>|</span>
+                <li><a href="#">云服务</a></li>
+                <span>|</span>
+                <li><a href="#">金融</a></li>
+                <span>|</span>
+                <li><a href="#">有品</a></li>
+                <span>|</span>
+                <li><a href="#">小爱开放平台</a></li>
+                <span>|</span>
+                <li><a href="#">企业团购</a></li>
+                <span>|</span>
+                <li><a href="#">资格证照</a></li>
+                <span>|</span>
+                <li><a href="#">协议规则</a></li>
+                <span>|</span>
+                <li class="download-father"><a class="downloadApp" href="#">下载APP</a><span class="download"><img
+                            src="../images/download.png" alt=""></span></li>
+                <span>|</span>
+                <li><a href="#">Select Location</a></li>
+            </ul>
+            <ol>
+                <li><a href="login.html" >登录</a></li><span>|</span>
+                <li><a href="">注册</a></li><span>|</span>
+                <li><a href="">消息通知</a> </li><span>|</span>
+                <li><a href=""><i class="iconfont icon-icon-test4"></i>购物车(0)</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="nav_top">
+        <ul>
+        </ul>
+    </div>
+    <div class="nav_box">
+        <ul>
+        </ul>
+    </div>
+    <div class="content-top-out">
+       <div class="content-top-in-one">
+        <p>
+            <span>首页></span>
+            <span>全部结果></span>
+            <span>智能家庭</span></p></div> 
+          <div class="content-top-in-two">
+            <p class="content-top-in-two-title">
+                <span class="content-top-in-two-title-one">分类：</span>
+                <span>全部</span>
+                <span>酷玩</span>
+                <span>智能</span>
+                <span>音箱</span>
+            </p>
+          </div>  
+          <div class="content-top-in-three">
+            <p class="content-top-in-three-title">
+                <span>综合</span>
+                <span>新品</span>
+                <span>销量</span>
+                <span>价格</span>
+            </p>
+          </div>  
+    </div>
+    <div class="content-bottom-out">
+        <div class="content-bottom-in">
+        <ul>
+            <li class="list">
+                <div>
+                   <img src="" alt="">
+                </div> 
+                <p class="title"></p>
+                <p class="price">123123</p>
+                <p class="img"><img src="" alt=""></p>
+               </li>
+               <li class="list">
+                <div>
+                   <img src="" alt="">
+                </div> 
+                <p class="title"></p>
+                <p class="price">123123</p>
+                <p class="img"><img src="" alt=""></p>
+               </li>
+               <li class="list">
+                <div>
+                   <img src="" alt="">
+                </div> 
+                <p class="title"></p>
+                <p class="price">123123</p>
+                <p class="img"><img src="" alt=""></p>
+               </li>
+               <li class="list">
+                <div>
+                   <img src="" alt="">
+                </div> 
+                <p class="title"></p>
+                <p class="price">123123</p>
+                <p class="img"><img src="" alt=""></p>
+               </li>
+        </ul>
+        </div>
+    </div>
+    <script src="../lib/swiper/js/swiper.min.js"></script>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../js/list.js"></script>
+    
+    <script>
+        function jsonpcallback(res){
+            console.log(res);
+            bindhtml(res.data.pc_list)
+        }
+        function bindhtml(list){
+            console.log(list);
+            let str='';
+           list.forEach(item => {
+                str+=`
+                <li class="list">
+                <div>
+                   <img src="${item.image}" alt="">
+                </div> 
+                <p class="title">${item.name}</p>
+                <p class="price">${item.price}</p>
+                <p class="img"><img src="${item.icon}" alt=""></p>
+               </li>
+                `
+            })
+            $('.content-bottom-in> ul').html(str)
+        }
+       
+    </script>
+   <script src="https://api.search.mi.com/search?callback=jsonpcallback&query=%E6%99%BA%E8%83%BD%E5%AE%B6%E5%BA%AD&page_index=1&page_size=20&filter_tag=0&main_sort=0&province_id=21&city_id=254&classIndex=0&_=1583487867119"></script>
+</body>
+</html>
